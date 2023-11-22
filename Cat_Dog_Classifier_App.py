@@ -42,11 +42,7 @@ def predict_image(img, model):
   model.set_tensor(input_tensor_index, img_array)
   model.invoke()
   prediction = output()
-  
-  if prediction[0][0] > 0.5:
-    result = st.success(f"Prediction: Dog (Probability: {prediction[0][0]:.2f})")
-  else:
-    result = st.success(f"Prediction: Cat (Probability: {1 - prediction[0][0]:.2f})")
+  return prediction
   
 # Loading the model:
   model = load_model()
@@ -54,10 +50,16 @@ def predict_image(img, model):
 if uploaded_file is not None:
   image = Image.open(uploaded_file)
   # Display the uploaded image and the prediction result
-  st.image(img, caption="Uploaded Image", use_column_width=True)
+  st.image(image, caption="Uploaded Image", use_column_width=True)
+  # Predict:
+  prediction = predict_image(image, model)
 
-  result = predict_image(image, model)
-  if result == 'Dog':
+   if prediction[0][0] > 0.5:
+    result = st.success(f"Prediction: Dog (Probability: {prediction[0][0]:.2f})")
+  else:
+    result = st.success(f"Prediction: Cat (Probability: {1 - prediction[0][0]:.2f})")
+    
+  if prediction == 'Dog':
     st.success("Prediction: Dog")
   else:
     st.success("Prediction: Cat")
