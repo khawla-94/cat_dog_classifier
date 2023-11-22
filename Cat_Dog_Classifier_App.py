@@ -24,11 +24,11 @@ def load_model():
 # Fonction pour faire une prédiction
 def predict_image(img, model):
   
+    img = Image.open(uploaded_file).convert('RGB')
     img = img.resize((200, 200))
-
-    img_array =  np.array(img).astype('float32')
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array = img_array / 255.0
+    img_array =  tf.keras.preprocessing.image.img_to_array(img)
+    img_array = tf.expand_dims(img_array, axis=0)
+    img_array /= 255.0
 
     # Préparer les données pour le modèle
     input_tensor_index = model.get_input_details()[0]['index']
@@ -65,6 +65,6 @@ if uploaded_file is not None:
     
     # Afficher la prédiction en mettant en évidence le résultat
     if result == 'Dog':
-        st.success("Prediction: Dog 🐶")
+        st.success(f"Prediction: Dog (Probability:{prediction[0, 0]: .2f})")
     else:
-        st.success("Prediction: Cat 🐱")
+        st.success(f"Prediction: Cat (Probability: {prediction[0, 0]:.2f})")
