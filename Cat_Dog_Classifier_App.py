@@ -8,11 +8,13 @@ import tempfile
 
 @st.cache(allow_output_mutation=True)
 def load_model():
-  model_url = "https://github.com/khawla-94/cat_dog_classifier/blob/main/cat_dog_classifier_model.tflite"
+  model_url = "https://github.com/khawla-94/cat_dog_classifier/raw/main/cat_dog_classifier_model.tflite"
   model_content = requests.get(model_url).content
   # Save the file in a temporary file:
   with tempfile.NamedTemporaryFile(delete = False) as temp_model_file:
     temp_model_file.write(model_content)
+  print(f"Temporary model file path: {temp_model_file.name}")
+  
   # Initialize the interpreter with a temporary file:
   model = tf.lite.Interpreter(model_path = temp_model_file.name)
   model.allocate_tensors()
