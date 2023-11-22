@@ -45,7 +45,7 @@ def predict_image(img, model):
   return prediction
   
 # Loading the model:
-  model = load_model()
+model = load_model()
 
 if uploaded_file is not None:
   image = Image.open(uploaded_file)
