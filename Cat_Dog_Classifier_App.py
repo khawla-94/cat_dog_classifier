@@ -65,6 +65,6 @@ if uploaded_file is not None:
     
     # Afficher la prédiction en mettant en évidence le résultat
     if result == 'Dog':
-        st.success(f"Prediction: Dog (Probability:{result[0, 0]: .2f})")
+        st.success("Prediction: It's a Dog ")
     else:
-        st.success(f"Prediction: Cat (Probability: {result[0, 0]:.2f})")
+        st.success(f"Prediction: It's a Cat ")
