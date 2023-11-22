@@ -57,7 +57,6 @@ if uploaded_file is not None:
   st.image(img, caption="Uploaded Image", use_column_width=True)
 
   result = predict_image(image, model)
-  d
   if result == 'Dog':
     st.success("Prediction: Dog")
   else:
