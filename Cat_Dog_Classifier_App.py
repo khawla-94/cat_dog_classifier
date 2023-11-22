@@ -56,10 +56,10 @@ if uploaded_file is not None:
   # Predict:
   prediction = predict_image(image, model)
 
-if prediction[0][0] > 0.5:
-  st.success(f"Prediction: Dog (Probability: {prediction[0][0]:.2f})")
+if prediction[0] > 0.5:
+  st.success(f"Prediction: Dog (Probability: {prediction[0]:.2f})")
 else:
-  st.success(f"Prediction: Cat (Probability: {1 - prediction[0][0]:.2f})")
+  st.success(f"Prediction: Cat (Probability: {1 - prediction[0]:.2f})")
     
 if prediction == 'Dog':
   st.success("Prediction: Dog")
