@@ -6,11 +6,14 @@ import numpy as np
 
 # Loading the model:
 @st.cache(allow_output_mutation = True)
-model_url = "https://github.com/khawla-94/cat_dog_classifier/raw/main/cat_dog_classifier_model.tflite" 
-interpreter = tf.lite.Interpreter(model_path = model_url)
-interpreter.alloacate_tensors()
+def load_model():
+    model_url = "https://github.com/khawla-94/cat_dog_classifier/raw/main/cat_dog_classifier_model.tflite" 
+    interpreter = tf.lite.Interpreter(model_path = model_url)
+    interpreter.alloacate_tensors()
+    return interpreter
 
 # Get input and output details:
+interpreter = load_model()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
