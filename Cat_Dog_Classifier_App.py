@@ -52,6 +52,9 @@ st.write("""
 # MSDE5 : Deep Learning Project
 ## Cat Vs Dog Classification using CNN and Transfer Learning
 """)
+
+st.sidebar.image("https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EvMbMNRHm_aOf1n4tDO1Xg.jpeg", width=250)
+
 st.write("Upload an image to classify whether it's a cat or a dog.")
 
 uploaded_file = st.file_uploader("Choose a file", type=["jpg", "jpeg", "png"])
