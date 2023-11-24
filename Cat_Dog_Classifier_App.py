@@ -61,7 +61,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    result = predict_image(image, model)
+    result = predict_image(uploaded_file, model)
     
     # Display the image:
     if result == 'Dog':
