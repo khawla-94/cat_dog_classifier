@@ -47,7 +47,7 @@ model = load_model()
 # Streamlit Web App:
 st.write("""
 # MSDE5 : Deep Learning Project
-## Cat Vs Dog Classification using CNN and Transfer Learning
+## Cat Vs Dog Classification using CNN and Transfer Learning updated
 """)
 
 st.sidebar.image("https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EvMbMNRHm_aOf1n4tDO1Xg.jpeg", width=250)
