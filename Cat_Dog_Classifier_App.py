@@ -71,7 +71,7 @@ if uploaded_file is not None:
     
     # Display the image:
     st.success(f"Prediction: It's a {result['value']}")
-    st.write(f"Prob: {{result['prob']}}")
+    st.write(f"Prob: {result['prob']}")
 
     st.write("Upload an image to classify whether it's a cat or a dog.")
     # if result == 'Dog':
