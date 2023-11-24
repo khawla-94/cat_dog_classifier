@@ -1,3 +1,4 @@
+# Importing dependencies:
 import streamlit as st
 import requests
 from PIL import Image
@@ -6,22 +7,20 @@ import tensorflow as tf
 from io import BytesIO
 import tempfile
 
-# Fonction pour charger le modèle depuis GitHub
+# Loading the model:
 @st.cache(allow_output_mutation=True)
 def load_model():
     model_url = "https://github.com/khawla-94/cat_dog_classifier/raw/main/cat_dog_classifier_model.tflite"
     model_content = requests.get(model_url).content
 
-    # Enregistrer le contenu dans un fichier temporaire
     with tempfile.NamedTemporaryFile(delete=False) as temp_model_file:
         temp_model_file.write(model_content)
 
-    # Initialiser l'interpréteur avec le fichier temporaire
     model = tf.lite.Interpreter(model_path=temp_model_file.name)
     model.allocate_tensors()
     return model
 
-# Fonction pour faire une prédiction
+# Make predictions:
 def predict_image(img, model):
   
     img = Image.open(uploaded_file).convert('RGB')
@@ -30,11 +29,9 @@ def predict_image(img, model):
     img_array = tf.expand_dims(img_array, axis=0)
     img_array /= 255.0
 
-    # Préparer les données pour le modèle
     input_tensor_index = model.get_input_details()[0]['index']
     output = model.tensor(model.get_output_details()[0]['index'])
 
-    # Faire une prédiction
     model.set_tensor(input_tensor_index, img_array)
     model.invoke()
     prediction = output()
@@ -44,7 +41,7 @@ def predict_image(img, model):
     else:
         return 'Cat'
 
-# Chargement du modèle
+# Loading the model:
 model = load_model()
 
 # Streamlit Web App:
@@ -64,10 +61,9 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    # Faire une prédiction avec le modèle
     result = predict_image(image, model)
     
-    # Afficher la prédiction en mettant en évidence le résultat
+    # Display the image:
     if result == 'Dog':
         st.success("Prediction: It's a Dog ")
     else:
