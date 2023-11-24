@@ -71,10 +71,10 @@ if uploaded_file is not None:
     # make predictions:
     prediction = predict_image(uploaded_file)
     # Display the prediction:
-    if prediction >= 0.5:
-        st.success(f"Prediction: Dog (Probability: {prediction:.2f})")
+    if prediction > 0.5:
+        st.success("Prediction: It's a Dog ")
     else:
-        st.success(f"Prediction: Cat (Probability: {1 - prediction:.2f})")
+        st.success("Prediction: It's a Cat)
 
 
 # import streamlit as st
