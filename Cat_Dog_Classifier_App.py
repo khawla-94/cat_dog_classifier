@@ -29,7 +29,7 @@ def preprocess_image(image_path):
     try:
         img = Image.open(image_path).convert('RGB')
         img = img.resize(input_shape, Image.BICUBIC)
-        img_array = np.array(img) / 255.0
+        img_array = np.array(img, dtype = np.float32) / 255.0
         img_array = np.expand_dims(img_array, axis = 0)
         return img_array
     except Exception as e:
