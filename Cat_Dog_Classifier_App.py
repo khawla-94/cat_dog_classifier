@@ -71,4 +71,4 @@ if uploaded_file is not None:
     
     # Display the image:
     st.success(f"Prediction: It's a {result['value']}")
-    st.write(f"Prob: {result['prob']}")
+    st.success(f"Prob: {result['prob']}")
