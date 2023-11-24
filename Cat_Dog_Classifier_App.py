@@ -39,12 +39,12 @@ def predict_image(img_to_predict, model):
     if prediction[0, 0] > 0.5:
         return {
             'value':'Dog',
-            'prob':  "{:.2f}".format(prediction[0, 0])
+            'prob':  "{:.4f}".format(prediction[0, 0])
         }
     else:
         return {
             'value':'Cat',
-            'prob':  "{:.2f}".format(1 - prediction[0, 0])
+            'prob':  "{:.4f}".format(1 - prediction[0, 0])
         }
 
 # Loading the model:
