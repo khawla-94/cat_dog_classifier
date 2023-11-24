@@ -35,17 +35,22 @@ def preprocess_image(image_path):
     except Exception as e:
         st.error(f"Error preprocessing image: {e}")
         return None
+
 # Function to make predictions:
 
 def predict_image(image_path):
     input_data = preprocess_image(image_path)
     if input_data is None:
         return None
-        
-    interpreter.set_tensor(input_details[0]['index'], input_data)
-    interpreter.invoke()
-    output_data = interpreter.get_tensor(output_details[0]['index'])
-    return output_data[0][0]
+    try:
+        print("Input data shape:", input_data.shape)
+        interpreter.set_tensor(input_details[0]['index'], input_data)
+        interpreter.invoke()
+        output_data = interpreter.get_tensor(output_details[0]['index'])
+        return output_data[0][0]
+    except Exception as e:
+        st.error(f"Error setting tensor: {e}")
+        return None
 
 # Streamlit App:
 st.write("""
