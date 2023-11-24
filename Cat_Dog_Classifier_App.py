@@ -26,16 +26,22 @@ input_shape = input_details[0]['shape'][1:3]
 # PreProcess the model:
 
 def preprocess_image(image_path):
-    img = Image.open(image_path).convert('RGB')
-    img = img.resize(input_shape, Image.ANTIALIAS)
-    img_array = np.array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis = 0)
-    return img_array
-
+    try:
+        img = Image.open(image_path).convert('RGB')
+        img = img.resize(input_shape, Image.ANTIALIAS)
+        img_array = np.array(img) / 255.0
+        img_array = np.expand_dims(img_array, axis = 0)
+        return img_array
+    except Exception as e:
+        st.error(f"Error preprocessing image: {e}")
+        return None
 # Function to make predictions:
 
 def predict_image(image_path):
     input_data = preprocess_image(image_path)
+    if input_data is None:
+        return None
+        
     interpreter.set_tensor(input_details[0]['index'], input_data)
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
