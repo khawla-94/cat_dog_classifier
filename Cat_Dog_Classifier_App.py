@@ -12,7 +12,7 @@ def load_model():
     model_url = "https://github.com/khawla-94/cat_dog_classifier/raw/main/cat_dog_classifier_model.tflite" 
     model_content = requests.get(model_url).content
     model = tf.lite.Interpreter(model_content = model_content)
-    model.alloacate_tensors()
+    model.allocate_tensors()
     return model
 
 # Get input and output details:
