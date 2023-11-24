@@ -39,12 +39,12 @@ def predict_image(img_to_predict, model):
     if prediction[0, 0] > 0.5:
         return {
             'value':'Dog',
-            'prob':  prediction[0, 0]
+            'prob':  "{:.2f}".format(prediction[0, 0])
         }
     else:
         return {
             'value':'Cat',
-            'prob':  1 - prediction[0, 0]
+            'prob':  "{:.2f}".format(1 - prediction[0, 0])
         }
 
 # Loading the model:
@@ -72,11 +72,3 @@ if uploaded_file is not None:
     # Display the image:
     st.success(f"Prediction: It's a {result['value']}")
     st.write(f"Prob: {result['prob']}")
-
-    st.write("Upload an image to classify whether it's a cat or a dog.")
-    # if result == 'Dog':
-    #     st.success("Prediction: It's a Dog ")
-    #     st.write(f"Prob: {}")
-    # else:
-    #     st.success(f"Prediction: It's a Cat ")
-    #     st.write("Upload an image to classify whether it's a cat or a dog.")
