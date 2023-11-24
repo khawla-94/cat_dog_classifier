@@ -43,7 +43,7 @@ def predict_image(image_path):
     if input_data is None:
         return None
     try:
-        print("Input data shape:", input_data.shape)
+        print("Input data shape:", input_data.shape if hasattr(input_data, 'shape') else "Not available")
         interpreter.set_tensor(input_details[0]['index'], input_data)
         interpreter.invoke()
         output_data = interpreter.get_tensor(output_details[0]['index'])
