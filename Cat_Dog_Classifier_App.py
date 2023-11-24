@@ -21,9 +21,9 @@ def load_model():
     return model
 
 # Make predictions:
-def predict_image(img, model):
+def predict_image(img_to_predict, model):
   
-    img = Image.open(uploaded_file).convert('RGB')
+    img = Image.open(img_to_predict).convert('RGB')
     img = img.resize((200, 200))
     img_array =  tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, axis=0)
