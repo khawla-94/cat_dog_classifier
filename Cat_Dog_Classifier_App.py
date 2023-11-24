@@ -37,9 +37,15 @@ def predict_image(img_to_predict, model):
     prediction = output()
 
     if prediction[0, 0] > 0.5:
-        return 'Dog'
+        return {
+            'value':'Dog',
+            'prob':  prediction[0, 0]
+        }
     else:
-        return 'Cat'
+        return {
+            'value':'Cat',
+            'prob':  1 - prediction[0, 0]
+        }
 
 # Loading the model:
 model = load_model()
@@ -47,12 +53,12 @@ model = load_model()
 # Streamlit Web App:
 st.write("""
 # MSDE5 : Deep Learning Project
-## Cat Vs Dog Classification using CNN and Transfer Learning updated
+## Cat Vs Dog Classification
 """)
 
 st.sidebar.image("https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EvMbMNRHm_aOf1n4tDO1Xg.jpeg", width=250)
 st.sidebar.write("This is a classification model of cat and dog images")
-# st.markdown("This project was made by : **KHAWLA BADDAR**")
+st.markdown("This project was made by : **KHAWLA BADDAR** & **Aymane ElAZHARI**")
 st.write("Upload an image to classify whether it's a cat or a dog.")
 
 uploaded_file = st.file_uploader("Choose a file", type=["jpg", "jpeg", "png"])
@@ -64,7 +70,13 @@ if uploaded_file is not None:
     result = predict_image(uploaded_file, model)
     
     # Display the image:
-    if result == 'Dog':
-        st.success("Prediction: It's a Dog ")
-    else:
-        st.success(f"Prediction: It's a Cat ")
+    st.success(f"Prediction: It's a {result['value']}")
+    st.write(f"Prob: {{result['prob']}}")
+
+    st.write("Upload an image to classify whether it's a cat or a dog.")
+    # if result == 'Dog':
+    #     st.success("Prediction: It's a Dog ")
+    #     st.write(f"Prob: {}")
+    # else:
+    #     st.success(f"Prediction: It's a Cat ")
+    #     st.write("Upload an image to classify whether it's a cat or a dog.")
