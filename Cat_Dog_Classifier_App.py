@@ -3,14 +3,17 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
+import requests
+from io import BytesIO
 
 # Loading the model:
 @st.cache(allow_output_mutation = True)
 def load_model():
     model_url = "https://github.com/khawla-94/cat_dog_classifier/raw/main/cat_dog_classifier_model.tflite" 
-    interpreter = tf.lite.Interpreter(model_path = model_url)
-    interpreter.alloacate_tensors()
-    return interpreter
+    model_content = requests.get(model_url).content
+    model = tf.lite.Interpreter(model_content = model_content)
+    model.alloacate_tensors()
+    return model
 
 # Get input and output details:
 interpreter = load_model()
